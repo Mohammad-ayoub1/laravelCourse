@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +13,13 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    @if(Auth::user()->hasRole('administrator'))
+                        <p>Welcome, Administrator! You have full access to the system.</p>
+                    @elseif(Auth::user()->hasRole('customer'))
+                        <p>Welcome, Editor! You can manage and edit content.</p>
+                    @else
+                        <p>Welcome, Viewer! You can view content.</p>
+                    @endif
                 </div>
             </div>
         </div>

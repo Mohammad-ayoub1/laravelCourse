@@ -10,6 +10,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    @if(Auth::user()->hasRole('administrator'))
+                        <p>Welcome, Administrator! You have full access to the system.</p>
+                    @elseif(Auth::user()->hasRole('customer'))
+                        <p>Welcome, Editor! You can manage and edit content.</p>
+                    @else(Auth::user()->hasRole('vindor'))
+                        <p>Welcome, Viewer! You can view content.</p>
+                    @endif
+
                 </div>
             </div>
         </div>
